@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"amplify-adapter": "^0.2.0",
-		"app": "file:"
+		"app": "file:",
+		"three": "^0.171.0"
 	}
 }
