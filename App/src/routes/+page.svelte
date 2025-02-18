@@ -37,7 +37,7 @@
         },
         { 
             type: 'video', 
-            src: 'CLOTHESFINALVOX.mp4', 
+            src: 'Clothesfinalvox.mp4', 
             title: 'Clothing Animation', 
             description: 'Dynamic cloth simulation with advanced materials', 
             section: '3d',
