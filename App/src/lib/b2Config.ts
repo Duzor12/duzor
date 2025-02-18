@@ -1,13 +1,12 @@
 import B2 from 'backblaze-b2';
 
 const b2 = new B2({
-    applicationKeyId: import.meta.env.VITE_B2_APPLICATION_KEY_ID,
-    applicationKey: import.meta.env.VITE_B2_APPLICATION_KEY
+    applicationKeyId: '005bcbcde84ebff0000000001',
+    applicationKey: 'davidMediaKey'
 });
 
 let authResponse: any = null;
-let bucketName = import.meta.env.VITE_B2_BUCKET_NAME;
-let cdnUrl = import.meta.env.VITE_B2_CDN_URL;
+let bucketName = 'davidmedia';
 const endpoint = 'https://s3.us-east-005.backblazeb2.com';
 
 async function ensureAuthorized() {
@@ -21,12 +20,7 @@ export function getAssetUrl(path: string): string {
     // Remove leading slash if present
     const cleanPath = path.replace(/^\//, '');
     
-    // If CDN URL is configured, use it
-    if (cdnUrl) {
-        return `${cdnUrl.replace(/\/$/, '')}/${cleanPath}`;
-    }
-    
-    // Use direct S3-style URL
+    // Construct the URL using the endpoint and bucket name
     return `${endpoint}/${bucketName}/${cleanPath}`;
 }
 
