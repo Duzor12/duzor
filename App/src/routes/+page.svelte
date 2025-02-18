@@ -21,7 +21,7 @@
         // 3D Design Projects
         { 
             type: 'video', 
-            src: '1715SlotMachine.mp4', 
+            src: '1715Slotmachine.mp4', 
             title: 'Slot Machine Animation', 
             description: '3D animated slot machine with detailed mechanics and lighting', 
             section: '3d',
@@ -61,7 +61,7 @@
         },
         { 
             type: 'video', 
-            src: 'VCardVideo.mp4', 
+            src: 'Vcardvideo.mp4', 
             title: 'Video Card Animation', 
             description: 'Animated graphics card with detailed components', 
             section: '3d',
@@ -77,7 +77,7 @@
         },
         {
             type: 'video',
-            src: 'VibesAndBottles.mp4',
+            src: 'Vibesandbottles.mp4',
             title: '3D Video',
             description: 'Promotional video for Vibes and Bottles 2.0 - a club event',
             section: '3d',
