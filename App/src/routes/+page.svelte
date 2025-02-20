@@ -17,11 +17,13 @@
         initialPosition: { x: number; y: number };
     };
     
+    const baseUrl = 'https://small-grass-69f6.duzor144.workers.dev/';
+    
     const items: ItemType[] = [
         // 3D Design Projects
         { 
             type: 'video', 
-            src: '1715Slotmachine.mp4', 
+            src: `${baseUrl}1715Slotmachine.mp4`, 
             title: 'Slot Machine Animation', 
             description: '3D animated slot machine with detailed mechanics and lighting', 
             section: '3d',
@@ -29,7 +31,7 @@
         },
         { 
             type: 'image', 
-            src: 'ChelseaAwayJersey.png', 
+            src: `${baseUrl}ChelseaAwayJersey.png`, 
             title: 'Chelsea Away Jersey', 
             description: 'Photorealistic jersey design with fabric simulation', 
             section: '3d',
@@ -37,7 +39,7 @@
         },
         { 
             type: 'video', 
-            src: 'Clothesfinalvox.mp4', 
+            src: `${baseUrl}CLOTHESFINALVOX.mp4`, 
             title: 'Clothing Animation', 
             description: 'Dynamic cloth simulation with advanced materials', 
             section: '3d',
@@ -45,7 +47,7 @@
         },
         { 
             type: 'image', 
-            src: 'LatteDrink.png', 
+            src: `${baseUrl}LatteDrink.png`, 
             title: 'Latte Visualization', 
             description: 'Stylized beverage render with volumetric lighting', 
             section: '3d',
@@ -53,7 +55,7 @@
         },
         { 
             type: 'image', 
-            src: 'ManSittingDown.png', 
+            src: `${baseUrl}ManSittingDown.png`, 
             title: 'Character Pose', 
             description: 'Character visualization with ambient lighting', 
             section: '3d',
@@ -61,7 +63,7 @@
         },
         { 
             type: 'video', 
-            src: 'Vcardvideo.mp4', 
+            src: `${baseUrl}VCardVideo.mp4`, 
             title: 'Video Card Animation', 
             description: 'Animated graphics card with detailed components', 
             section: '3d',
@@ -69,7 +71,7 @@
         },
         { 
             type: 'image', 
-            src: 'WomanSittingComposited.png', 
+            src: `${baseUrl}WomanSittingComposited.png`, 
             title: 'Character Composition', 
             description: 'Composited character render with environmental lighting', 
             section: '3d',
@@ -77,7 +79,7 @@
         },
         {
             type: 'video',
-            src: 'Vibesandbottles.mp4',
+            src: `${baseUrl}VibesAndBottles.mp4`,
             title: '3D Video',
             description: 'Promotional video for Vibes and Bottles 2.0 - a club event',
             section: '3d',
@@ -87,7 +89,7 @@
         // Software Engineering Section
         { 
             type: 'resume',
-            src: 'Resume-David+Uzor.pdf',
+            src: `${baseUrl}Resume-David Uzor.pdf`,
             title: 'Software Engineering Resume',
             description: 'View my professional experience and technical skills',
             section: 'software',

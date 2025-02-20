@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { draggable } from '@neodrag/svelte';
-  import { getAssetUrl } from '$lib/b2Config';
 
   export let item: {
     type: 'image' | 'video' | 'resume';
@@ -16,35 +15,39 @@
 
   let showDetails = false;
   let showResume = false;
-  let assetUrl = getAssetUrl(item.src);
-  let resumeUrl = 'https://s3.us-east-005.backblazeb2.com/davidmedia/Resume-David+Uzor.pdf';
 
-  $: console.log('Current asset URL:', item.type === 'resume' ? resumeUrl : assetUrl);
+  $: console.log('Current asset URL:', item.src);
 
   let isLoaded = false;
   let isVisible = false;
 
+  let videoElement: HTMLVideoElement;
+  
   onMount(() => {
-    // Add staggered delay based on index
     setTimeout(() => {
       isVisible = true;
     }, index * 100);
 
     if (item.type === 'image') {
       const img = new Image();
-      img.src = assetUrl;
+      img.src = item.src;
       img.onload = () => {
         isLoaded = true;
       };
     } else if (item.type === 'video') {
-      const video = document.createElement('video');
-      video.src = assetUrl;
-      video.onloadeddata = () => {
-        isLoaded = true;
-      };
+      if (videoElement) {
+        videoElement.addEventListener('loadeddata', () => {
+          isLoaded = true;
+        });
+        
+        videoElement.addEventListener('error', (e) => {
+          console.error('Video load error:', e);
+          isLoaded = false;
+        });
+      }
     } else if (item.type === 'resume') {
       // For resume, we'll check if the PDF exists
-      fetch(resumeUrl, { method: 'HEAD' })
+      fetch(item.src, { method: 'HEAD' })
         .then(response => {
           isLoaded = response.ok;
         })
@@ -55,7 +58,7 @@
   });
 
   function handleImageError() {
-    const img = document.querySelector(`img[src="${assetUrl}"]`) as HTMLImageElement;
+    const img = document.querySelector(`img[src="${item.src}"]`) as HTMLImageElement;
     if (img) img.style.opacity = '0.5';
   }
 
@@ -84,12 +87,12 @@
   aria-label={item.title}
 >
   {#if !isLoaded}
-    <div class="loading-skeleton" />
+    <div class="loading-skeleton"></div>
   {/if}
   
   {#if item.type === 'image'}
     <img 
-      src={assetUrl} 
+      src={item.src} 
       alt={item.title} 
       draggable="false"
       decoding="async"
@@ -97,14 +100,24 @@
     />
   {:else if item.type === 'video'}
     <video 
-      src={assetUrl} 
+      bind:this={videoElement}
+      src={item.src} 
       autoplay 
       loop 
       muted 
       playsinline
       draggable="false"
-      preload="metadata"
-    />
+      preload="auto"
+      on:error={(e) => {
+        console.error('Video error for:', item.src, e.target.error);
+      }}
+      on:loadstart={() => console.log('Video load started:', item.src)}
+      on:progress={() => console.log('Video loading:', item.src)}
+      on:loadeddata={() => {
+        console.log('Video loaded:', item.src);
+        isLoaded = true;
+      }}
+    ></video>
   {:else if item.type === 'resume'}
     <button 
       class="resume-button"
@@ -134,7 +147,7 @@
     <div class="resume-content">
       <button class="close-button" on:click={() => showResume = false}>×</button>
       <iframe 
-        src={resumeUrl}
+        src={item.src}
         title="Resume PDF"
         width="100%"
         height="100%"
